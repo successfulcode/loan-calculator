@@ -1,1 +1,24 @@
-<p>calculator works!</p>
+<form class="mt-4">
+  <label>Total monthly income</label>
+  <input type="number" class="form-control">
+  <label>Have a children</label>
+  <select class="form-select">
+    <option value="NONE" selected>NONE</option>
+    <option value="SINGLE">SINGLE</option>
+    <option value="MULTIPLE">MULTIPLE</option>
+  </select>
+  <label>Applying with a co-applicant</label>
+  <select class="form-select">
+    <option value="NONE" selected>NONE</option>
+    <option value="SINGLE_BORROWER">SINGLE BORROWER</option>
+    <option value="MULTIPLE_BORROWERS">MULTIPLE BORROWERS</option>
+  </select>
+  <label>Loan amount</label>
+  <input type="number" class="form-control">
+  <label>Loan term</label>
+  <input type="number" class="form-control">
+  <div class="d-flex justify-content-center mt-3">
+    <button type="submit" class="btn btn-primary me-2">Calculate</button>
+    <button type="reset" class="btn btn-secondary">Reset</button>
+  </div>
+</form>
