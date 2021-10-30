@@ -1,0 +1,10 @@
+.calculator-container {
+  margin: auto;
+  display: flex;
+  justify-content: center;
+}
+
+.calculator-container__form {
+  max-width: 25rem;
+  width: 100%;
+}

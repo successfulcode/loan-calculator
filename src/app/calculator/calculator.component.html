@@ -1,24 +1,49 @@
-<form class="mt-4" [formGroup]="calculatorForm" (ngSubmit)="onSubmit()">
-  <label for="income">Total monthly income</label>
-  <input type="number" id="income" class="form-control" formControlName="income">
-  <label for="children">Have a children</label>
-  <select id="children" class="form-select" formControlName="children">
-    <option value="NONE">NONE</option>
-    <option value="SINGLE">SINGLE</option>
-    <option value="MULTIPLE">MULTIPLE</option>
-  </select>
-  <label for="coapplicant">Applying with a co-applicant</label>
-  <select id="coapplicant" class="form-select" formControlName="coapplicant">
-    <option value="NONE">NONE</option>
-    <option value="SINGLE_BORROWER">SINGLE BORROWER</option>
-    <option value="MULTIPLE_BORROWERS">MULTIPLE BORROWERS</option>
-  </select>
-  <label for="amount">Loan amount</label>
-  <input type="number" id="amount" class="form-control" formControlName="amount">
-  <label for="term">Loan term</label>
-  <input type="number" id="term" class="form-control" formControlName="term">
-  <div class="d-flex justify-content-center mt-3">
-    <button type="submit" class="btn btn-primary me-2">Calculate</button>
-    <button type="reset" class="btn btn-secondary">Reset</button>
-  </div>
-</form>
+<div class="calculator-container">
+  <form
+    class="mt-4 calculator-container__form"
+    [formGroup]="calculatorForm"
+    (ngSubmit)="onSubmit()"
+  >
+    <label for="income" class="mt-1">Total monthly income</label>
+    <input
+      type="number"
+      id="income"
+      class="form-control"
+      formControlName="income"
+    />
+    <label for="children" class="mt-2">Have a children</label>
+    <select id="children" class="form-select" formControlName="children">
+      <option value="NONE">None</option>
+      <option value="SINGLE">Single</option>
+      <option value="MULTIPLE">Multiple</option>
+    </select>
+    <label for="coapplicant" class="mt-2">Applying with a co-applicant</label>
+    <select id="coapplicant" class="form-select" formControlName="coapplicant">
+      <option value="NONE">None</option>
+      <option value="SINGLE_BORROWER">Single borrower</option>
+      <option value="MULTIPLE_BORROWERS">Multiple borrowers</option>
+    </select>
+    <label for="amount" class="mt-2">Loan amount</label>
+    <input
+      type="number"
+      id="amount"
+      class="form-control"
+      formControlName="amount"
+    />
+    <label for="term" class="mt-2">Loan term</label>
+    <input
+      type="number"
+      id="term"
+      class="form-control"
+      formControlName="term"
+    />
+    <div class="d-flex justify-content-center mt-3">
+      <button [disabled]="isLoading" type="submit" class="btn btn-primary me-2">
+        Calculate
+      </button>
+      <button [disabled]="isLoading" type="reset" class="btn btn-secondary">
+        Reset
+      </button>
+    </div>
+  </form>
+</div>
