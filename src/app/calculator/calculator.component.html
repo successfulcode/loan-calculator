@@ -1,6 +1,9 @@
 <div class="calculator-container">
-  {{isLoading}}
-  <form class="mt-4 calculator-container__form" [formGroup]="calculatorForm" (ngSubmit)="onSubmit()">
+  <form
+    class="mt-4 calculator-container__form"
+    [formGroup]="calculatorForm"
+    (ngSubmit)="onSubmit()"
+  >
     <label for="income" class="mt-1">Total monthly income</label>
     <input
       type="number"
@@ -35,8 +38,12 @@
       formControlName="term"
     />
     <div class="d-flex justify-content-center mt-3">
-      <button type="submit" class="btn btn-primary me-2">Calculate</button>
-      <button type="reset" class="btn btn-secondary">Reset</button>
+      <button [disabled]="isLoading" type="submit" class="btn btn-primary me-2">
+        Calculate
+      </button>
+      <button [disabled]="isLoading" type="reset" class="btn btn-secondary">
+        Reset
+      </button>
     </div>
   </form>
 </div>
