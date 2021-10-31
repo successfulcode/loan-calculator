@@ -8,3 +8,21 @@
   max-width: 25rem;
   width: 100%;
 }
+
+.first-button { 
+  margin-right: .7rem;
+}
+
+@media only screen and (max-width: 320px) {
+  .form-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  button{
+    margin-bottom: .7rem;
+  }
+  .first-button { 
+    margin-right: 0;
+  }
+}
+

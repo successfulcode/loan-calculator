@@ -4,45 +4,107 @@
     [formGroup]="calculatorForm"
     (ngSubmit)="onSubmit()"
   >
-    <label for="income" class="mt-1">Total monthly income</label>
-    <input
-      type="number"
-      id="income"
-      class="form-control"
-      formControlName="income"
-    />
-    <label for="children" class="mt-2">Have a children</label>
-    <select id="children" class="form-select" formControlName="children">
-      <option value="NONE">None</option>
-      <option value="SINGLE">Single</option>
-      <option value="MULTIPLE">Multiple</option>
-    </select>
-    <label for="coapplicant" class="mt-2">Applying with a co-applicant</label>
-    <select id="coapplicant" class="form-select" formControlName="coapplicant">
-      <option value="NONE">None</option>
-      <option value="SINGLE_BORROWER">Single borrower</option>
-      <option value="MULTIPLE_BORROWERS">Multiple borrowers</option>
-    </select>
-    <label for="amount" class="mt-2">Loan amount</label>
-    <input
-      type="number"
-      id="amount"
-      class="form-control"
-      formControlName="amount"
-    />
-    <label for="term" class="mt-2">Loan term</label>
-    <input
-      type="number"
-      id="term"
-      class="form-control"
-      formControlName="term"
-    />
-    <div class="d-flex justify-content-center mt-3">
-      <button [disabled]="isLoading" type="submit" class="btn btn-primary me-2">
+    <div>
+      <label for="income" class="mt-1">Total monthly income</label>
+      <div class="input-group has-validation">
+        <input
+          type="number"
+          id="income"
+          class="form-control"
+          formControlName="income"
+          [ngClass]="{
+            'is-invalid':
+              calculatorForm.controls.income.status === 'INVALID' &&
+              calculatorForm.controls.income.touched
+          }"
+          aria-describedby="incomeFeedback"
+        />
+        <div id="incomeFeedback" class="invalid-feedback">
+          {{ requiredFieldMessage }}
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <label for="children" class="mt-2">Have a children</label>
+      <select id="children" class="form-select" formControlName="children">
+        <option value="NONE">None</option>
+        <option value="SINGLE">Single</option>
+        <option value="MULTIPLE">Multiple</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="coapplicant" class="mt-2">Applying with a co-applicant</label>
+      <select
+        id="coapplicant"
+        class="form-select"
+        formControlName="coapplicant"
+      >
+        <option value="NONE">None</option>
+        <option value="SINGLE_BORROWER">Single borrower</option>
+        <option value="MULTIPLE_BORROWERS">Multiple borrowers</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="amount" class="mt-2">Loan amount</label>
+      <div class="input-group has-validation">
+        <input
+          type="number"
+          id="amount"
+          class="form-control"
+          formControlName="amount"
+          [ngClass]="{
+            'is-invalid':
+              calculatorForm.controls.amount.status === 'INVALID' &&
+              calculatorForm.controls.amount.touched
+          }"
+          aria-describedby="amountFeedback"
+        />
+        <div id="amountFeedback" class="invalid-feedback">
+          {{ requiredFieldMessage }}
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <label for="term" class="mt-2">Loan term</label>
+      <div class="input-group has-validation">
+        <input
+          type="number"
+          id="term"
+          class="form-control"
+          formControlName="term"
+          [ngClass]="{
+            'is-invalid':
+              calculatorForm.controls.term.status === 'INVALID' &&
+              calculatorForm.controls.term.touched
+          }"
+          aria-describedby="termFeedback"
+        />
+        <div id="termFeedback" class="invalid-feedback">
+          {{ requiredFieldMessage }}
+        </div>
+      </div>
+    </div>
+
+    <div class="form-buttons d-flex justify-content-center mt-3">
+      <button
+        [disabled]="isLoading || calculatorForm.status === 'INVALID'"
+        type="submit"
+        class="btn btn-primary first-button col-5"
+      >
         Calculate
+        <fa-icon [icon]="faCalculator"></fa-icon>
       </button>
-      <button [disabled]="isLoading" type="reset" class="btn btn-secondary">
+      <button
+        [disabled]="isLoading"
+        type="reset"
+        class="btn btn-secondary col-5"
+      >
         Reset
+        <fa-icon [icon]="faMinusSquare"></fa-icon>
       </button>
     </div>
   </form>

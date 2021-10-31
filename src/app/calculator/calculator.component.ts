@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { faCalculator, faMinusSquare } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-calculator',
@@ -12,6 +13,9 @@ export class CalculatorComponent {
 
   conditions = {};
   isLoading = false;
+  requiredFieldMessage = 'This field is required';
+  faCalculator = faCalculator;
+  faMinusSquare = faMinusSquare;
 
   onCalculateLoan(loanParams: {
     monthlyIncome: number;
@@ -49,15 +53,16 @@ export class CalculatorComponent {
       children: this.calculatorForm.value.children,
       coapplicant: this.calculatorForm.value.coapplicant,
     };
+    console.log('calculatorForm', this.calculatorForm)
     this.onCalculateLoan(loanParams);
     this.calculatorForm.reset();
   }
 
   calculatorForm = new FormGroup({
-    income: new FormControl(null),
+    income: new FormControl(null, Validators.required),
     children: new FormControl('NONE'),
     coapplicant: new FormControl('NONE'),
-    amount: new FormControl(null),
-    term: new FormControl(null),
+    amount: new FormControl(null, Validators.required),
+    term: new FormControl(null, Validators.required),
   });
 }
