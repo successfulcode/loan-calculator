@@ -1,4 +1,6 @@
+
 <div class="calculator-container">
+  <div>test</div>
   <form
     class="mt-4 calculator-container__form"
     [formGroup]="calculatorForm"
@@ -96,7 +98,8 @@
         class="btn btn-primary first-button col-5"
       >
         Calculate
-        <fa-icon [icon]="faCalculator"></fa-icon>
+        <fa-icon [icon]="faCalculator" *ngIf="!isLoading"></fa-icon>
+        <span class="spinner-border spinner-border-sm" *ngIf="isLoading"></span>
       </button>
       <button
         [disabled]="isLoading"
