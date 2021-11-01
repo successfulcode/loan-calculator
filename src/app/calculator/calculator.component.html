@@ -1,11 +1,32 @@
+<div
+  class="alert alert-danger alert-dismissible fade show mt-2"
+  role="alert"
+  *ngIf="errorMessages.length > 0 && displayErrors"
+>
+  <strong>We can't give you a loan!</strong>
+  <div *ngFor="let errorMessage of errorMessages">
+    {{ errorMessage.message }}
+  </div>
+  <button type="button" class="btn-close" (click)="onCloseErrorMessage()"></button>
+</div>
+<div
+  class="alert alert-success alert-dismissible fade show mt-2"
+  role="alert"
+  *ngIf="loanConditions.interestRate &&loanConditions.loanAmount && displayLoanConditions"
+>
+  <strong>We can give you a loan!</strong>
+  <div>Rate: {{ loanConditions.interestRate / 1000 }} proc.</div>
+  <div>Loan amount: {{ loanConditions.loanAmount / 1000 }} Eur.</div>
+  <button type="button" class="btn-close" (click)="onCloseDisplayLoanConditions()"></button>
+</div>
 <div class="calculator-container">
   <form
-    class="mt-4 calculator-container__form"
+    class="mt-2 mb-3 calculator-container__form"
     [formGroup]="calculatorForm"
     (ngSubmit)="onSubmit()"
   >
     <div>
-      <label for="income" class="mt-1">Total monthly income</label>
+      <label for="income" class="mt-1">Total monthly income (Eur)</label>
       <div class="input-group has-validation">
         <input
           type="number"
@@ -48,7 +69,7 @@
     </div>
 
     <div>
-      <label for="amount" class="mt-2">Loan amount</label>
+      <label for="amount" class="mt-2">Loan amount (Eur)</label>
       <div class="input-group has-validation">
         <input
           type="number"
@@ -69,7 +90,7 @@
     </div>
 
     <div>
-      <label for="term" class="mt-2">Loan term</label>
+      <label for="term" class="mt-2">Loan term (Months)</label>
       <div class="input-group has-validation">
         <input
           type="number"
@@ -89,14 +110,26 @@
       </div>
     </div>
 
-    <div class="form-buttons d-flex justify-content-center mt-3">
+    <div
+      class="
+        calculator-container__form-buttons
+        d-flex
+        justify-content-center
+        mt-3
+      "
+    >
       <button
         [disabled]="isLoading || calculatorForm.status === 'INVALID'"
         type="submit"
-        class="btn btn-primary first-button col-5"
+        class="
+          calculator-container__form-buttons--first-button
+          btn btn-primary
+          col-5
+        "
       >
         Calculate
-        <fa-icon [icon]="faCalculator"></fa-icon>
+        <fa-icon [icon]="faCalculator" *ngIf="!isLoading"></fa-icon>
+        <span class="spinner-border spinner-border-sm" *ngIf="isLoading"></span>
       </button>
       <button
         [disabled]="isLoading"
