@@ -11,11 +11,14 @@ import { faCalculator, faMinusSquare } from '@fortawesome/free-solid-svg-icons';
 export class CalculatorComponent {
   constructor(private http: HttpClient) {}
 
-  conditions = {};
   isLoading = false;
   requiredFieldMessage = 'This field is required';
   faCalculator = faCalculator;
   faMinusSquare = faMinusSquare;
+  loanConditions: any = {};
+  errorMessages: any = [];
+  displayLoanConditions = false;
+  displayErrors = false;
 
   onCalculateLoan(loanParams: {
     monthlyIncome: number;
@@ -35,27 +38,33 @@ export class CalculatorComponent {
       .subscribe(
         (res) => {
           this.isLoading = false;
-          this.conditions = res;
+          this.loanConditions = res;
+          this.displayErrors = false;
+          this.displayLoanConditions = true;
+          this.errorMessages = [];
           console.log('data', res);
         },
         (err) => {
           this.isLoading = false;
-          console.log('err', err.status);
+          this.errorMessages = err.error.fields;
+          this.displayLoanConditions = false;
+          this.loanConditions = {};
+          this.displayErrors = true;
+          console.log('err', this.errorMessages);
         }
       );
   }
 
   onSubmit() {
     const loanParams = {
-      monthlyIncome: this.calculatorForm.value.income,
-      requestedAmount: this.calculatorForm.value.amount,
+      monthlyIncome: this.calculatorForm.value.income*1000,
+      requestedAmount: this.calculatorForm.value.amount*1000,
       loanTerm: this.calculatorForm.value.term,
       children: this.calculatorForm.value.children,
       coapplicant: this.calculatorForm.value.coapplicant,
     };
     console.log('calculatorForm', this.calculatorForm)
     this.onCalculateLoan(loanParams);
-    this.calculatorForm.reset();
   }
 
   calculatorForm = new FormGroup({
@@ -65,4 +74,14 @@ export class CalculatorComponent {
     amount: new FormControl(null, Validators.required),
     term: new FormControl(null, Validators.required),
   });
+
+  onCloseErrorMessage(){
+    this.errorMessages = [];
+    this.displayErrors = false;
+  }
+
+  onCloseDisplayLoanConditions(){
+    this.displayLoanConditions = false;
+    this.loanConditions = {};
+  }
 }
