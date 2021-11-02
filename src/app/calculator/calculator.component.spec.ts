@@ -1,5 +1,6 @@
+import { FormControl } from '@angular/forms';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CalculatorComponent } from './calculator.component';
 
 describe('CalculatorComponent', () => {
@@ -8,6 +9,7 @@ describe('CalculatorComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule], 
       declarations: [ CalculatorComponent ]
     })
     .compileComponents();
@@ -19,7 +21,28 @@ describe('CalculatorComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('Should create', () => {
     expect(component).toBeTruthy();
+  })
+
+  it('Display calculate button text', () => {
+    const button: HTMLElement =  fixture.nativeElement.querySelector('.btn-primary');
+    fixture.detectChanges();
+    expect(button.textContent).toContain('Calculate');
+  });
+
+  it('Display reset button text', () => {
+    const button: HTMLElement =  fixture.nativeElement.querySelector('.btn-secondary');
+    fixture.detectChanges();
+    expect(button.textContent).toContain('Reset');
+  });
+
+  it('Input values', () => {
+    const input: HTMLElement =  fixture.nativeElement.querySelector('input');
+    input.nodeValue=''
+    input.dispatchEvent(new Event('input'))
+    fixture.detectChanges();
+    expect(input.textContent).toBe('')
   });
 });
+
