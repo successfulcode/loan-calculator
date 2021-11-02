@@ -42,7 +42,6 @@ export class CalculatorComponent {
           this.displayErrors = false;
           this.displayLoanConditions = true;
           this.errorMessages = [];
-          console.log('data', res);
         },
         (err) => {
           this.isLoading = false;
@@ -50,7 +49,6 @@ export class CalculatorComponent {
           this.displayLoanConditions = false;
           this.loanConditions = {};
           this.displayErrors = true;
-          console.log('err', this.errorMessages);
         }
       );
   }
@@ -63,7 +61,6 @@ export class CalculatorComponent {
       children: this.calculatorForm.value.children,
       coapplicant: this.calculatorForm.value.coapplicant,
     };
-    console.log('calculatorForm', this.calculatorForm)
     this.onCalculateLoan(loanParams);
   }
 

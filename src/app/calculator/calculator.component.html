@@ -36,12 +36,18 @@
           [ngClass]="{
             'is-invalid':
               calculatorForm.controls.income.status === 'INVALID' &&
-              calculatorForm.controls.income.touched
+              calculatorForm.controls.income.touched || 
+              errorMessages.length === 1 && errorMessages[0].params === 'monthlyIncome' ||
+              errorMessages.length === 2 && errorMessages[0].params === 'monthlyIncome' ||
+              errorMessages.length === 2 && errorMessages[1].params === 'monthlyIncome' ||
+              errorMessages.length === 3 && errorMessages[0].params === 'monthlyIncome' ||
+              errorMessages.length === 3 && errorMessages[1].params === 'monthlyIncome' ||
+              errorMessages.length === 3 && errorMessages[2].params === 'monthlyIncome' 
           }"
           aria-describedby="incomeFeedback"
         />
         <div id="incomeFeedback" class="invalid-feedback">
-          {{ requiredFieldMessage }}
+          {{ errorMessages.length > 0 ? 'Minimum income is 500 EUR' : requiredFieldMessage }}
         </div>
       </div>
     </div>
@@ -79,12 +85,18 @@
           [ngClass]="{
             'is-invalid':
               calculatorForm.controls.amount.status === 'INVALID' &&
-              calculatorForm.controls.amount.touched
+              calculatorForm.controls.amount.touched ||
+              errorMessages.length === 1 && errorMessages[0].params === 'requestedAmount' ||
+              errorMessages.length === 2 && errorMessages[0].params === 'requestedAmount' ||
+              errorMessages.length === 2 && errorMessages[1].params === 'requestedAmount' ||
+              errorMessages.length === 3 && errorMessages[0].params === 'requestedAmount' ||
+              errorMessages.length === 3 && errorMessages[1].params === 'requestedAmount' ||
+              errorMessages.length === 3 && errorMessages[2].params === 'requestedAmount' 
           }"
           aria-describedby="amountFeedback"
         />
         <div id="amountFeedback" class="invalid-feedback">
-          {{ requiredFieldMessage }}
+          {{ errorMessages.length > 0 ? 'Minimum loan of 20000 available' :  requiredFieldMessage }}
         </div>
       </div>
     </div>
@@ -100,12 +112,18 @@
           [ngClass]="{
             'is-invalid':
               calculatorForm.controls.term.status === 'INVALID' &&
-              calculatorForm.controls.term.touched
+              calculatorForm.controls.term.touched ||
+              errorMessages.length === 1 && errorMessages[0].params === 'loanTerm' ||
+              errorMessages.length === 2 && errorMessages[0].params === 'loanTerm' ||
+              errorMessages.length === 2 && errorMessages[1].params === 'loanTerm' ||
+              errorMessages.length === 3 && errorMessages[0].params === 'loanTerm' ||
+              errorMessages.length === 3 && errorMessages[1].params === 'loanTerm' ||
+              errorMessages.length === 3 && errorMessages[2].params === 'loanTerm' 
           }"
           aria-describedby="termFeedback"
         />
         <div id="termFeedback" class="invalid-feedback">
-          {{ requiredFieldMessage }}
+          {{ errorMessages.length > 0 ? 'Minimum term: 36 months' : requiredFieldMessage }}
         </div>
       </div>
     </div>
