@@ -34,7 +34,7 @@ export class CalculatorComponent {
     });
     const options = { headers: headers };
     return this.http
-      .post('https://homework.fdp.workers.dev', loanParams, options)
+      .post('/api', loanParams, options)
       .subscribe(
         (res) => {
           this.isLoading = false;
